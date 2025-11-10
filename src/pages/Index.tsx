@@ -1,6 +1,6 @@
 import MenuItem from "@/components/MenuItem";
 import { useEffect, useRef, useState } from "react";
-import cocktailShakerImg from "@/assets/cocktail-shaker.png";
+import centerImage from "@/assets/5896.png";
 import espressoImg from "@/assets/espresso.jpg";
 import espressoDoubleImg from "@/assets/espresso-double.jpg";
 import americanoImg from "@/assets/americano.jpg";
@@ -22,7 +22,7 @@ const Index = () => {
   useEffect(() => {
     // Preload the sound if it exists in public folder. Fails silently if not found.
     try {
-      audioRef.current = new Audio("/water-drop.wav");
+      audioRef.current = new Audio("/digi-beep-qst-346094.mp3");
       // Slightly reduce volume to feel like a subtle pour/drop
       if (audioRef.current) {
         audioRef.current.volume = 0.6;
@@ -151,12 +151,12 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Center image - full viewport height, fixed width similar to SpecialMenu */}
+        {/* Center image - full viewport height, fixed width */}
         <div className="flex-none w-[410px] mx-2 flex items-start justify-center">
           <img
-            src={cocktailShakerImg}
-            alt="Cocktail Shaker"
-            className="h-full w-auto object-contain object-top"
+            src={centerImage}
+            alt="Center display"
+            className="h-full w-auto object-contain object-top drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
           />
         </div>
 
@@ -177,13 +177,17 @@ const Index = () => {
       {/* Full-screen loading overlay with spinner and center image */}
       {isLoading && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-[1px] flex items-center justify-center">
-          <div className="flex flex-col items-center gap-6">
-            <img
-              src="/4TH-EYE-FINAL-09.png"
-              alt="Loading emblem"
-              className="h-24 w-24 object-contain"
-            />
-            <div className="h-12 w-12 rounded-full border-4 border-gold border-t-transparent animate-spin" />
+          <div className="relative w-32 h-32 animate-spin">
+            {/* Spinner ring */}
+            <div className="absolute inset-0 rounded-full border-4 border-gold/30 border-t-gold" />
+            {/* Logo in center - rotates with spinner container */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src="/4TH-EYE-FINAL-09.png"
+                alt="Loading emblem"
+                className="h-20 w-20 object-contain"
+              />
+            </div>
           </div>
         </div>
       )}

@@ -176,17 +176,20 @@ const Index = () => {
 
       {/* Full-screen loading overlay with spinner and center image */}
       {isLoading && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-[1px] flex items-center justify-center">
-          <div className="relative w-32 h-32 animate-spin">
-            {/* Spinner ring */}
-            <div className="absolute inset-0 rounded-full border-4 border-gold/30 border-t-gold" />
-            {/* Logo in center - rotates with spinner container */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src="/4TH-EYE-FINAL-09.png"
-                alt="Loading emblem"
-                className="h-20 w-20 object-contain"
-              />
+        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-[1px] flex items-center justify-center" style={{ perspective: "800px", perspectiveOrigin: "center" }}>
+          <div className="relative w-32 h-32 flex items-center justify-center">
+            {/* Spinner ring - rotates normally */}
+            <div className="absolute inset-0 rounded-full border-4 border-gold/30 border-t-gold animate-spin" />
+            {/* Logo in center - rotates in 3D on Y axis */}
+            <div className="relative z-10" style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}>
+              <div className="animate-rotate-y-3d" style={{ transformStyle: "preserve-3d" }}>
+                <img
+                  src="/4TH-EYE-FINAL-09.png"
+                  alt="Loading emblem"
+                  className="h-20 w-20 object-contain"
+                  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                />
+              </div>
             </div>
           </div>
         </div>
